@@ -1,0 +1,6 @@
+{
+  "name": "Cricket Live Scores & Stats",
+  "description": "Retro-futuristic cricket broadcast HUD displaying simulated real-time match dynamics, ball-by-ball updates, live scoreboard computing advanced batsman/bowler metrics, current win probabilities, and immersive AI-powered strategic analysis.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}

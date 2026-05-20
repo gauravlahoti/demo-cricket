@@ -1,0 +1,154 @@
+@import "tailwindcss";
+
+:root {
+  --bg: #070A10;
+  --bg-2: #0A0E14;
+  --surface: rgba(255, 255, 255, 0.035);
+  --surface-2: rgba(255, 255, 255, 0.07);
+  --border: rgba(0, 229, 255, 0.22);
+  --cyan: #00E5FF;
+  --magenta: #FF2D9B;
+  --green: #3DFFA2;
+  --red: #FF5470;
+  --amber: #FFC542;
+  --text: #EAF1FF;
+  --muted: #7F8AA3;
+}
+
+body {
+  background-color: var(--bg);
+  color: var(--text);
+  font-family: 'Sora', sans-serif;
+  margin: 0;
+  padding: 0;
+  overflow-x: hidden;
+}
+
+/* Custom Typography Helpers */
+.font-display {
+  font-family: 'Rajdhani', sans-serif;
+  font-weight: 700;
+}
+
+.font-hud {
+  font-family: 'Chakra Petch', sans-serif;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+}
+
+.font-body {
+  font-family: 'Sora', sans-serif;
+}
+
+/* Glass Panels */
+.glass-panel {
+  background: var(--surface);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  border: 1px solid var(--border);
+  box-shadow: 0 0 40px rgba(0, 229, 255, 0.04);
+  border-radius: 18px;
+}
+
+.glass-panel-active {
+  background: var(--surface-2);
+  border-color: var(--cyan);
+  box-shadow: 0 0 40px rgba(0, 229, 255, 0.12);
+}
+
+.glass-panel-wicket {
+  background: rgba(255, 45, 155, 0.05);
+  border-color: var(--magenta);
+  box-shadow: 0 0 40px rgba(255, 45, 155, 0.1);
+}
+
+/* Scanline HUD effect */
+.scanlines {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: repeating-linear-gradient(
+    rgba(255, 255, 255, 0) 0px,
+    rgba(255, 255, 255, 0) 1px,
+    rgba(255, 255, 255, 0.008) 2px,
+    rgba(255, 255, 255, 0.008) 3px
+  );
+  pointer-events: none;
+  z-index: 999;
+}
+
+/* Ambient glow and radial vignettes */
+.vignette-ambient {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background: radial-gradient(circle at center, transparent 30%, rgba(7, 10, 16, 0.8) 95%);
+  pointer-events: none;
+  z-index: -10;
+}
+
+.glow-bottom {
+  position: fixed;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 140%;
+  height: 250px;
+  background: radial-gradient(ellipse at bottom, rgba(0, 229, 255, 0.08) 0%, transparent 70%);
+  pointer-events: none;
+  z-index: -9;
+}
+
+/* Animations */
+@keyframes pulseGlow {
+  0%, 100% { opacity: 0.3; }
+  50% { opacity: 0.8; }
+}
+
+.animate-pulse-glow {
+  animation: pulseGlow 2s infinite alternate;
+}
+
+@keyframes springIn {
+  0% { transform: scale(0.92); opacity: 0; }
+  75% { transform: scale(1.02); opacity: 0.8; }
+  100% { transform: scale(1); opacity: 1; }
+}
+
+.animate-spring {
+  animation: springIn 0.45s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
+}
+
+@keyframes wicketPulse {
+  0% { box-shadow: 0 0 0 0 rgba(255, 45, 155, 0.6); }
+  70% { box-shadow: 0 0 0 20px rgba(255, 45, 155, 0); }
+  100% { box-shadow: 0 0 0 0 rgba(255, 45, 155, 0); }
+}
+
+.wicket-flash {
+  animation: wicketPulse 1.2s cubic-bezier(0.1, 0.8, 0.3, 1) infinite;
+}
+
+@keyframes ticker-scroll {
+  0% { transform: translate3d(0, 0, 0); }
+  100% { transform: translate3d(-50%, 0, 0); }
+}
+
+.ticker-wrap {
+  overflow: hidden;
+  white-space: nowrap;
+}
+
+.ticker-content {
+  display: inline-block;
+  padding-left: 100%;
+  animation: ticker-scroll 35s linear infinite;
+}
+
+.ticker-content:hover {
+  animation-play-state: paused;
+}
